@@ -1,25 +1,11 @@
-import { Client, GatewayIntentBits } from "discord.js";
+const { Client, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent
-  ]
+  intents: [GatewayIntentBits.Guilds]
 });
-
-const TOKEN = process.env.TOKEN;
 
 client.once("ready", () => {
-  console.log(`ログイン成功: ${client.user.tag}`);
+  console.log("起動成功");
 });
 
-client.on("messageCreate", (message) => {
-  if (message.author.bot) return;
-
-  if (message.content === "!ping") {
-    message.reply("Pong!");
-  }
-});
-
-client.login(TOKEN);
+client.login(process.env.TOKEN);
